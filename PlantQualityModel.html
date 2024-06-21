@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Quality</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Your CSS styles go here */
+        #captureContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        #imagePreview {
+            max-width: 100%;
+            max-height: 70vh;
+            margin-bottom: 20px;
+        }
+        #confirmButtons {
+            display: flex;
+            gap: 20px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.3.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@3.0.4"></script> 
+    <script>
+        // Load Model 1 here
+        const modelName = 'PlantQuality';
+        loadModel(modelName);
+    </script>
+    <script>
+        function openDrawer() {
+          document.getElementById("drawer").style.width = "250px";
+          document.getElementById("content").style.marginLeft = "250px";
+        }
+      
+        function closeDrawer() {
+          document.getElementById("drawer").style.width = "0";
+          document.getElementById("content").style.marginLeft = "0";
+        }
+    </script>
+</head>
+<body>
+    <div class="topnav" style="position: relative;top: 120px;">
+        <a class="active" href="homepage.html">Home</a>
+        <a href="AboutUs.html">About</a>
+        <a href="Feedback.html">Feedback</a>
+        <a href="TermsOfService.html">TermsOfService</a>
+        <a href="FAQ.html">FAQs</a>
+      </div>
+      <h2 style="color: rgb(226, 236, 229); text-align: center;">Fruit Quality Model</h2><br>
+      <br>
+      
+      <div id="captureContainer">
+        <video id="video" width="640" height="480" autoplay></video>
+        <button onclick="captureImage()">Capture Image</button>
+        <div id="gallery">
+            <!-- Images will be added dynamically using JavaScript -->
+        </div>
+        
+            <input type="file" id="fileInput" name="image" accept="image/*">
+            <br>
+            
+        <!-- <input type="file" id="upload" accept="image/*" multiple> -->
+        <!-- Add any additional buttons or controls here -->
+    </div>
+
+
+    <div id="confirmContainer" style="display: none;">
+        <img id="imagePreview" alt="Captured Image">
+        <div id="confirmButtons" style="padding-left: 230px;">
+            <button onclick="retakeImage()">Retake</button>
+            <button onclick="runInference()">Confirm</button>
+        </div>
+    </div>
+
+    <div id="inferenceContainer" style="display: none;">
+        <p>Running TFLite Model Inference...</p>
+        <p id="predictionLabel"></p>
+        <p id="confidenceLabel"></p>
+    </div>
+
+    <script>
+        let videoStream, imageCapture, imageData, model;
+
+        async function startCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                videoStream = stream;
+                const videoElement = document.getElementById('video');
+                videoElement.srcObject = stream;
+
+                const track = stream.getVideoTracks()[0];
+                imageCapture = new ImageCapture(track);
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+            }
+        }
+
+        async function loadModel() {
+            try {
+                // Use API endpoint to load the model
+                const response = await fetch('http://localhost:8000/load_model');
+                const modelConfig = await response.json();
+
+                // Initialize your TensorFlow.js model using modelConfig
+                model = await tf.loadGraphModel(modelConfig.url);
+                console.log('Model loaded successfully!');
+            } catch (error) {
+                console.error('Error loading the model:', error);
+            }
+        }
+
+        // async function loadModel() {
+        //     try {
+        //         model = await tf.lite.loadModel('Fruit_quality.tflite');
+        //         console.log('Model loaded successfully!');
+        //     } catch (error) {
+        //         console.error('Error loading the model:', error);
+        //     }
+        // }
+
+        function preprocessImage(imageData) {
+            const tensor = tf.browser.fromPixels(imageData);
+            // Preprocess the image (e.g., resize, normalize) as needed
+            // This depends on the preprocessing steps applied during model training
+            // Adjust the following preprocessing steps based on your model's requirements
+            const resized = tf.image.resizeBilinear(tensor, [224, 224]);
+            const expanded = resized.expandDims(0);
+            const preprocessed = expanded.toFloat().div(tf.scalar(255.0));
+
+            return preprocessed;
+        }
+
+        function runInference() {
+            document.getElementById('confirmContainer').style.display = 'none';
+            document.getElementById('inferenceContainer').style.display = 'block';
+
+            try {
+                const tensor = preprocessImage(imageData);
+                const predictions = model.predict(tensor);
+
+                const output = Array.from(predictions.dataSync());
+                const topPredictionIndex = output.indexOf(Math.max(...output));
+
+                // Map prediction index to relevant information
+                const diseaseInfo = getDiseaseInfo(topPredictionIndex);
+
+                const predictionLabel = document.getElementById('predictionLabel');
+                const confidenceLabel = document.getElementById('confidenceLabel');
+
+                predictionLabel.textContent = 'Prediction: ' + diseaseInfo.name;
+                confidenceLabel.textContent = 'Confidence: ' + (output[topPredictionIndex] * 100).toFixed(2) + '%';
+
+                // Display additional information based on the disease
+                displayDiseaseInformation(diseaseInfo);
+
+                tf.dispose([tensor, predictions]);
+
+            } catch (error) {
+                console.error('Error during inference:', error);
+            }
+        }
+
+        function captureImage() {
+    try {
+        imageCapture.takePhoto()
+            .then(photo => {
+                imageData = photo;
+                console.log('Image captured successfully:', imageData); 
+                const imagePreview = document.getElementById('imagePreview');
+                imagePreview.src = URL.createObjectURL(photo);
+                
+                document.getElementById('captureContainer').style.display = 'none';
+                document.getElementById('confirmContainer').style.display = 'block';
+                
+            })
+            .catch(error => {
+                console.error('Error capturing image:', error);
+            });
+    } catch (error) {
+        console.error('Error capturing image:', error);
+    }
+}
+
+
+        function retakeImage() {
+            document.getElementById('captureContainer').style.display = 'flex';
+            document.getElementById('confirmContainer').style.display = 'none';
+            startCamera();
+        }
+
+        // Initialize the camera and load the model on page load
+        startCamera();
+        loadModel();
+    </script>
+    <div id="drawer">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeDrawer()">&times;</a>
+         <a href="homepage.html">Home</a>
+         <div class="dropdown">
+         <a href="#">Download</a>
+             <div class="dropdown-content">
+                 <a href="documentation.html">Documentation</a>
+                 <a href="#">App Installation</a>
+             </div>
+         </div>
+         <a href="ContactUs.html">Contact</a>
+     </div>
+       <div id="content">
+         <div id="menu-btn" onclick="openDrawer()">&#9776; Menu</div>
+       </div>
+</body>
+</html>

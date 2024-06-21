@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>FAQ - Plant Fettle Detector</title>
+    <style>
+        h3 {
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function openDrawer() {
+          document.getElementById("drawer").style.width = "250px";
+          document.getElementById("content").style.marginLeft = "250px";
+        }
+      
+        function closeDrawer() {
+          document.getElementById("drawer").style.width = "0";
+          document.getElementById("content").style.marginLeft = "0";
+        }
+
+      </script>
+</head>
+<body>
+  <div class="topnav" style="position: relative;top: 120px;">
+    <a class="active" href="homepage.html">Home</a>
+    <a href="AboutUs.html">About</a>
+    <a href="Feedback.html">Feedback</a>
+    <a href="TermsOfService.html">TermsOfService</a>
+    <a href="FAQ.html">FAQs</a>
+  </div>
+<h2 style="color: rgb(226, 236, 229); text-align: center;">Frequently Asked Questions</h2>
+<div class="textcolor">
+    <form action="submit_feedback.php" method="post">
+        
+          
+<div class="text-box" style="color: rgb(226, 236, 229); background-color: rgba(44, 24, 4, 0.704);">
+    <h3>General Questions:</h3>
+    <p><strong>Q: What is Plant Fettle Detector?</strong><br>
+    A: Plant Fettle Detector is an app that utilizes advanced image recognition and machine learning to assess the health and quality of plants, including detecting plant diseases and assessing fruit quality.</p>
+
+    <p><strong>Q: How can I access Plant Fettle Detector?</strong><br>
+    A: You can access Plant Fettle Detector through our website or by downloading the mobile app from the App Store or Google Play.</p>
+
+    <h3>Using the App:</h3>
+    <p><strong>Q: How does the fruit quality detection feature work?</strong><br>
+    A: The fruit quality detection feature uses image analysis algorithms to assess the quality of fruits based on visual characteristics such as color, size, and shape.</p>
+
+    <p><strong>Q: Can Plant Fettle Detector identify all plant diseases?</strong><br>
+    A: While Plant Fettle Detector is designed to identify a wide range of plant diseases, it may not cover every possible disease. The app's effectiveness may vary based on the quality of the input images and the specific characteristics of the diseases.</p>
+
+    <h3>Support and Contact:</h3>
+    <p><strong>Q: How can I get in touch with customer support?</strong><br>
+    A: You can reach our customer support team by emailing us at <a href="mailto:support@plantfettledetector.com" style="color:bisque">support@plantfettledetector.com</a> or by filling out the support request form on our website.</p>
+
+    <p><strong>Q: Is there a community forum for Plant Fettle Detector users?</strong><br>
+    A: Yes, we have a community forum where users can discuss plant care, share experiences, and ask questions. You can find the forum [insert link to the forum].</p>
+
+    <p><strong>Q: How frequently is the app updated?</strong><br>
+    A: We aim to provide regular updates to improve the app's features, accuracy, and user experience. Updates are typically released as needed to address user feedback and incorporate new advancements.</p>
+    </div>
+</div>
+
+</div>
+<div id="drawer">
+   
+    <a href="javascript:void(0)" class="close-btn" onclick="closeDrawer()">&times;</a>
+    <a href="homepage.html">Home</a>
+    <div class="dropdown">
+    <a href="#">Download</a>
+        <div class="dropdown-content">
+            <a href="documentation.html">Documentation</a>
+            <a href="#">App Installation</a>
+        </div>
+    </div>
+    <a href="ContactUs.html">Contact</a>
+
+ 
+  </div>
+  
+  <div id="content">
+    <div id="menu-btn" onclick="openDrawer()">&#9776; Menu</div>
+  </div>
+</body>
+</html>

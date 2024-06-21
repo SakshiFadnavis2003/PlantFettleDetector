@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TFLite Web App</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Your CSS styles go here */
+        #captureContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        #imagePreview {
+            max-width: 100%;
+            max-height: 70vh;
+            margin-bottom: 20px;
+        }
+        #confirmButtons {
+            display: flex;
+            gap: 20px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.5.0"></script>
+    <script>
+        // Load Model 1 here
+        const modelName = 'PlantDisease';
+        loadModel(modelName);
+    </script>
+</head>
+<body>
+    <div class="topnav" style="position: relative;top: 120px;">
+        <a class="active" href="homepage.html">Home</a>
+        <a href="AboutUs.html">About</a>
+        <a href="Feedback.html">Feedback</a>
+        <a href="TermsOfService.html">TermsOfService</a>
+        <a href="FAQ.html">FAQs</a>
+    </div>
+    <h2 style="color: rgb(226, 236, 229); text-align: center;">Fruit Quality Model</h2><br>
+    <br>
+    
+    <div id="captureContainer">
+        <video id="video" width="640" height="480" autoplay></video>
+        <button onclick="captureImage()">Capture Image</button>
+        <div id="gallery">
+            <!-- Images will be added dynamically using JavaScript -->
+        </div>
+        
+        <input type="file" id="fileInput" name="image" accept="image/*">
+        <br>
+        
+    </div>
+
+    <div id="confirmContainer" style="display: none;">
+        <img id="imagePreview" alt="Captured Image">
+        <div id="confirmButtons" style="padding-left: 230px;">
+            <button onclick="retakeImage()">Retake</button>
+            <button onclick="runInference()">Confirm</button>
+        </div>
+    </div>
+
+    <div id="inferenceContainer" style="display: none;">
+        <p>Running TFLite Model Inference...</p>
+        <p id="predictionLabel"></p>
+        <p id="confidenceLabel"></p>
+        <div id="causes"></div>
+        <div id="cure"></div>
+        <div id="prevention"></div>
+    </div>
+
+    <script>
+        let videoStream, imageCapture, imageData, model;
+
+        async function startCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                videoStream = stream;
+                const videoElement = document.getElementById('video');
+                videoElement.srcObject = stream;
+
+                const track = stream.getVideoTracks()[0];
+                imageCapture = new ImageCapture(track);
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+            }
+        }
+
+        async function loadModel() {
+            try {
+                // Use API endpoint to load the model
+                const response = await fetch('http://localhost:8000/load_model');
+                const modelConfig = await response.json();
+
+                // Initialize your TensorFlow.js model using modelConfig
+                model = await tf.loadGraphModel(modelConfig.url);
+                console.log('Model loaded successfully!');
+            } catch (error) {
+                console.error('Error loading the model:', error);
+            }
+        }
+
+        function runInference() {
+            document.getElementById('confirmContainer').style.display = 'none';
+            document.getElementById('inferenceContainer').style.display = 'block';
+
+            try {
+                const tensor = preprocessImage(imageData);
+                const predictions = model.predict(tensor);
+
+                const output = Array.from(predictions.dataSync());
+                const topPredictionIndex = output.indexOf(Math.max(...output));
+
+                // Map prediction index to relevant information
+                const diseaseInfo = getDiseaseInfo(topPredictionIndex);
+
+                const predictionLabel = document.getElementById('predictionLabel');
+                const confidenceLabel = document.getElementById('confidenceLabel');
+
+                predictionLabel.textContent = 'Prediction: ' + diseaseInfo.name;
+                confidenceLabel.textContent = 'Confidence: ' + (output[topPredictionIndex] * 100).toFixed(2) + '%';
+
+                // Display additional information based on the disease
+                displayDiseaseInformation(diseaseInfo);
+
+                tf.dispose([tensor, predictions]);
+
+            } catch (error) {
+                console.error('Error during inference:', error);
+            }
+        }
+
+        function getDiseaseInfo(predictionIndex) {
+            // Define a mapping between prediction index and disease information
+            const diseaseMappings = [
+                {
+                    name: 'Apple Scab',
+                    causes: [
+                        'Fungal Infection: Caused by the fungus Venturia inaequalis.',
+                        'Environmental Condition: Thrives in wet, humid conditions, spreading through spores in moisture.'
+                    ],
+                    cure: [
+                        'Fungicides: Apply contact and systemic fungicides preventatively before infection.',
+                        'Organic Treatments: Copper or sulfur-based sprays can help reduce scab severity.'
+                    ],
+                    prevention: [
+                        'Pruning: Remove infected leaves and fruits to reduce disease spread.',
+                        'Air Circulation: Promote good air flow among trees to reduce moisture and inhibit fungal growth.',
+                        'Fungicidal Sprays: Use as a preventive measure on uninfected leaves and fruits.',
+                        'Resistant Varieties: Opt for apple varieties resistant to scab.'
+                    ]
+                },
+                {
+                    name: 'Black Rot',
+                    causes: [
+                        'Fungal Infection: Caused by the fungus Botryosphaeria obtusa.',
+                        'Environmental Condition: Thrives in warm, humid regions, causing significant damage especially in such climates.'
+                    ],
+                    cure: [
+                        'Pruning: Remove cankers to reduce the spread of the disease.',
+                        'Fungicides: Applying full-rate fungicides can help control black rot.'
+                    ],
+                    prevention: [
+                        'Prune Cankers: Regularly prune and remove cankers to minimize the presence of the disease.',
+                        'Avoid Humid Conditions: Reduce humidity and moisture around trees to prevent fungal growth.'
+                    ]
+                },
+                {
+                    name: 'Cedar Apple Rust',
+                    causes: [
+                        'Fungal Pathogen: Caused by the fungus Gymnosporangium juniperi-virginianae, completing its lifecycle between juniper plants and apple trees.',
+                        'Environmental Conditions: Thrives in warm, humid weather; requires both juniper and apple trees for its life cycle.'
+                    ],
+                    cure: [
+                        'Fungicides: Using fungicides containing Myclobutanil can effectively prevent rust if applied before leaf spots or fruit development.',
+                        'Fungicide Spray Schedule: Applying fungicides starting at blossom time and continuing at regular intervals.'
+                    ],
+                    prevention: [
+                        'Cultural Methods: Avoid planting junipers near apple trees to limit the disease\'s spread.',
+                        'Sterol Inhibitors: Incorporating sterol inhibitors into apple production as a preventative measure against rust.'
+                    ]
+                },
+                // Add more mappings as needed
+            ];
+
+            return diseaseMappings[predictionIndex] || { name: 'Unknown', causes: ['Unknown'], cure: ['Unknown'], prevention: ['Unknown'] };
+        }
+
+        function displayDiseaseInformation(diseaseInfo) {
+            const causesElement = document.getElementById('causes');
+            const cureElement = document.getElementById('cure');
+            const preventionElement = document.getElementById('prevention');
+
+            causesElement.innerHTML = '<h3>Causes:</h3>' + diseaseInfo.causes.join('<br>');
+            cureElement.innerHTML = '<h3>Cure:</h3>' + diseaseInfo.cure.join('<br>');
+            preventionElement.innerHTML = '<h3>Prevention:</h3>' + diseaseInfo.prevention.join('<br>');
+        }
+
+        function preprocessImage(imageData) {
+            const tensor = tf.browser.fromPixels(imageData);
+            // Preprocess the image (e.g., resize, normalize) as needed
+            // This depends on the preprocessing steps applied during model training
+            // Adjust the following preprocessing steps based on your model's requirements
+            const resized = tf.image.resizeBilinear(tensor, [224, 224]);
+            const expanded = resized.expandDims(0);
+            const preprocessed = expanded.toFloat().div(tf.scalar(255.0));
+
+            return preprocessed;
+        }
+
+        function captureImage() {
+            try {
+                imageCapture.takePhoto()
+                    .then(photo => {
+                        imageData = photo;
+                        console.log('Image captured successfully:', imageData);
+                        const imagePreview = document.getElementById('imagePreview');
+                        imagePreview.src = URL.createObjectURL(photo);
+
+                        document.getElementById('captureContainer').style.display = 'none';
+                        document.getElementById('confirmContainer').style.display = 'block';
+                    })
+                    .catch(error => {
+                        console.error('Error capturing image:', error);
+                    });
+            } catch (error) {
+                console.error('Error capturing image:', error);
+            }
+        }
+
+        function retakeImage() {
+            document.getElementById('captureContainer').style.display = 'flex';
+            document.getElementById('confirmContainer').style.display = 'none';
+            startCamera();
+        }
+
+        // Initialize the camera and load the model on page load
+        startCamera();
+        loadModel();
+    </script>
+
+    <div id="drawer">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeDrawer()">&times;</a>
+         <a href="homepage.html">Home</a>
+         <div class="dropdown">
+         <a href="#">Download</a>
+             <div class="dropdown-content">
+                 <a href="documentation.html">Documentation</a>
+                 <a href="#">App Installation</a>
+             </div>
+         </div>
+         <a href="ContactUs.html">Contact</a>
+    </div>
+    <div id="content">
+        <div id="menu-btn" onclick="openDrawer()">&#9776; Menu</div>
+    </div>
+</body>
+</html>

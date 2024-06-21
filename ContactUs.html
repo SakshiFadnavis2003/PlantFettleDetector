@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>ContactUs</title>
+    <script>
+        function openDrawer() {
+          document.getElementById("drawer").style.width = "250px";
+          document.getElementById("content").style.marginLeft = "250px";
+        }
+      
+        function closeDrawer() {
+          document.getElementById("drawer").style.width = "0";
+          document.getElementById("content").style.marginLeft = "0";
+        }
+
+      </script>
+</head>
+<body>
+  <div class="topnav" style="position: relative;top: 120px;">
+    <a class="active" href="homepage.html">Home</a>
+    <a href="AboutUs.html">About</a>
+    <a href="Feedback.html">Feedback</a>
+    <a href="TermsOfService.html">TermsOfService</a>
+    <a href="FAQ.html">FAQs</a>
+  </div>
+<h2 style="color: rgb(226, 236, 229); text-align: center;">Contact Us</h2>
+<div class="textcolor">
+    <form action="submit_feedback.php" method="post">
+        
+          
+<div class="text-box" style="color: rgb(226, 236, 229); background-color: rgba(44, 24, 4, 0.704);">
+    <p>We value your feedback and inquiries. Feel free to reach out to us using the contact information below:</p>
+
+    <p><strong>Email:</strong> <a href="mailto:info@plantfettledetector.com" style="color:bisque">info@plantfettledetector.com</a></p>
+
+    <p><strong>Phone:</strong> 0123456789</p>
+
+    <p>If you have any questions, comments, or issues regarding the Plant Fettle Detector app, our team is here to assist you. Whether you're a user with a technical inquiry or a potential partner interested in collaboration, we look forward to hearing from you!</p>
+
+    <p>Follow us on social media for updates and news:</p>
+    <ul>
+        <li><a href="https://www.facebook.com/plantfettledetector" style="color:bisque">Facebook</a></li>
+        <li><a href="https://twitter.com/plantfettledetector" style="color:bisque">Twitter</a></li>
+        <li><a href="https://www.instagram.com/plantfettledetector/" style="color:bisque">Instagram</a></li>
+    </ul>
+
+    <p>We appreciate your interest in Plant Fettle Detector and thank you for being part of our community!</p>
+  </div>
+</div>
+<div id="drawer">
+   
+    <a href="javascript:void(0)" class="close-btn" onclick="closeDrawer()">&times;</a>
+    <a href="homepage.html">Home</a>
+    <div class="dropdown">
+    <a href="#">Download</a>
+        <div class="dropdown-content">
+            <a href="documentation.html">Documentation</a>
+            <a href="#">App Installation</a>
+        </div>
+    </div>
+    <a href="ContactUs.html">Contact</a>
+
+ 
+  </div>
+  
+  <div id="content">
+    <div id="menu-btn" onclick="openDrawer()">&#9776; Menu</div>
+  </div>
+</body>
+</html>

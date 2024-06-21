@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function openDrawer() {
+          document.getElementById("drawer").style.width = "250px";
+          document.getElementById("content").style.marginLeft = "250px";
+        }
+      
+        function closeDrawer() {
+          document.getElementById("drawer").style.width = "0";
+          document.getElementById("content").style.marginLeft = "0";
+        }
+
+      </script>
+    <title>AboutUs</title>
+</head>
+<body>
+    <div class="topnav" style="position: relative;top: 120px;">
+        <a class="active" href="homepage.html">Home</a>
+        <a href="AboutUs.html">About</a>
+        <a href="Feedback.html">Feedback</a>
+        <a href="TermsOfService.html">TermsOfService</a>
+        <a href="FAQ.html">FAQs</a>
+      </div>
+    <h2 style="color: rgb(226, 236, 229); text-align: center;">About Us</h2>
+    <div class="textcolor">
+        <form action="submit_feedback.php" method="post">
+            
+              
+    <div class="text-box" style="color: rgb(226, 236, 229); background-color: rgba(44, 24, 4, 0.704);">
+    <p>Welcome to Plant Fettle Detector, where we combine technology and agriculture to revolutionize the way we monitor and care for plants. Our mission is to empower farmers, gardeners, and plant enthusiasts with advanced tools for assessing the health and quality of plants and fruits.</p>
+
+    <p>At Plant Fettle Detector, we believe in the potential of technology to address challenges in the agricultural sector. Our app leverages state-of-the-art image recognition and machine learning algorithms to provide accurate assessments of fruit quality and detect potential plant diseases.</p>
+
+    <p>Key Features of Plant Fettle Detector:</p>
+    <ul>
+        <li>Accurate Fruit Quality Detection</li>
+        <li>Advanced Plant Disease Identification</li>
+        <li>User-Friendly Interface</li>
+        <li>Real-time Monitoring and Analysis</li>
+    </ul>
+
+    <p>Our team is passionate about contributing to sustainable agriculture and promoting plant health. We strive to make our app accessible and easy to use for individuals of all levels of expertise, from seasoned farmers to hobbyist gardeners.</p>
+
+    <p>Have a question or feedback for us? We'd love to hear from you! Contact us at <a href="mailto:info@plantfettledetector.com" style="color:bisque">info@plantfettledetector.com</a>.</p>
+
+    <p>Thank you for choosing Plant Fettle Detector to enhance your plant care experience!</p>
+    </div>
+</div>
+<div id="drawer">
+   
+    <a href="javascript:void(0)" class="close-btn" onclick="closeDrawer()">&times;</a>
+    <a href="homepage.html">Home</a>
+    <div class="dropdown">
+    <a href="#">Download</a>
+        <div class="dropdown-content">
+            <a href="documentation.html">Documentation</a>
+            <a href="#">App Installation</a>
+        </div>
+    </div>
+    <a href="ContactUs.html">Contact</a>
+
+ 
+  </div>
+  
+  <div id="content">
+    <div id="menu-btn" onclick="openDrawer()">&#9776; Menu</div>
+  </div>
+</body>
+</html>

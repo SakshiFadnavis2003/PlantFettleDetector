@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>HomePage</title>
+    <script>
+        function openDrawer() {
+          document.getElementById("drawer").style.width = "250px";
+          document.getElemfront.htmlentById("content").style.marginLeft = "250px";
+        }
+      
+        function closeDrawer() {
+          document.getElementById("drawer").style.width = "0";
+          document.getElementById("content").style.marginLeft = "0";
+        }
+
+      </script>
+</head>
+<body>
+</div>
+    <div class="bg-text">
+    <center>
+        <h2 style="font-family:Arial, Helvetica, sans-serif; font-size: xx-large; color: rgb(226, 236, 229);">Orange Fettle Detector</h2>
+        <h3 style="font-family:Arial, Helvetica, sans-serif; font-size: x-large; color: rgb(226, 236, 229);">Unified Solution for your fruits and plants</h3> 
+        <div class="topnav">
+            <a class="active" href="#home">Home</a>
+            <a href="AboutUs.html">About</a>
+            <a href="Feedback.html">Feedback</a>
+            <a href="TermsOfService.html">TermsOfService</a>
+            <a href="FAQ.html">FAQs</a>
+          </div>
+
+        <p style="font-family:Arial, Helvetica, sans-serif; font-size: x-large; color: rgb(226, 236, 229);">Choose one option to proceed</p>
+        <button id="choicebtn"><a href="OrangeQualityModel.html" target="_blank" style=" color: rgb(5, 5, 5)"> Fruit Quality</a></button><br>
+        <button id="choicebtn"><a href="OrangeDiseaseModel.html" target="_blank" style=" color: rgb(5, 5, 5)">Plant Disease</a></button>
+    </center>
+    
+    <div id="drawer">
+   
+        <a href="javascript:void(0)" class="close-btn" onclick="closeDrawer()">&times;</a>
+        <a href="homepage.html">Home</a>
+        <div class="dropdown">
+        <a href="#">Download</a>
+            <div class="dropdown-content">
+                <a href="documentation.html">Documentation</a>
+                <a href="#">App Installation</a>
+            </div>
+        </div>
+        <a href="ContactUs.html">Contact</a>
+    
+     
+      </div>
+      
+      <div id="content">
+        <div id="menu-btn" onclick="openDrawer()">&#9776; Menu</div>
+      </div>
+</body>
+</html>

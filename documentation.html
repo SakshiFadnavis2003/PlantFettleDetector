@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plant Fettle Detector Documentation</title>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    function openDrawer() {
+      document.getElementById("drawer").style.width = "250px";
+      document.getElementById("content").style.marginLeft = "250px";
+    }
+  
+    function closeDrawer() {
+      document.getElementById("drawer").style.width = "0";
+      document.getElementById("content").style.marginLeft = "0";
+    }
+
+  </script>
+</head>
+<body>
+  <div class="topnav" style="position: relative;top: 120px;">
+    <a class="active" href="homepage.html">Home</a>
+    <a href="AboutUs.html">About</a>
+    <a href="Feedback.html">Feedback</a>
+    <a href="TermsOfService.html">TermsOfService</a>
+    <a href="FAQ.html">FAQs</a>
+  </div>
+  <h1 style="color: rgb(226, 236, 229); text-align: center;">Plant Fettle Detector Documentation</h1>
+  <div class="textcolor">
+    <form action="submit_feedback.php" method="post">
+  <div class="text-box" style="color: rgb(226, 236, 229); background-color: rgba(44, 24, 4, 0.704)">
+    <p>
+  <section id="introduction">
+    <h2 style="color: rgb(226, 236, 229);">Introduction</h2>
+   
+     
+      Welcome to the documentation for the Plant Fettle Detector. The Plant Fettle Detector is an advanced tool designed to analyze and monitor the health of plants, providing valuable insights to growers and enthusiasts. Whether you are a professional farmer or an avid gardener, this detector empowers you to make informed decisions about plant care, leading to healthier and more productive vegetation.
+    </p>
+    <p>
+      <strong>Key Features:</strong>
+    </p>
+    <ul>
+      <li><strong>Advanced Plant Health Analysis:</strong> Utilize cutting-edge algorithms to assess the health and condition of your plants.</li>
+      <li><strong>Real-time Monitoring:</strong> Receive immediate feedback on the well-being of your vegetation for timely intervention.</li>
+      <li><strong>User-Friendly Interface:</strong> An intuitive web interface makes the Plant Fettle Detector accessible to users of all skill levels.</li>
+      <li><strong>Customizable Notifications:</strong> Tailor notifications to alert you about specific plant health conditions or changes.</li>
+    </ul>
+  </section>
+
+  <section id="installation">
+    <h2 style="color: rgb(226, 236, 229);">Installation</h2>
+    <p>
+      To install the Plant Fettle Detector, follow these steps:
+    </p>
+    <pre>
+      <code>
+        git clone https://github.com/yourusername/plant-fettle-detector.git
+        cd plant-fettle-detector
+        pip install -r requirements.txt
+      </code>
+    </pre>
+  </section>
+
+  
+    <section id="getting-started">
+        <h2 style="color: rgb(226, 236, 229);">Getting Started</h2>
+        <p>
+          Welcome to the Plant Fettle Detector! This section will guide you through the initial steps to set up and use the detector for analyzing the health of your plants.
+        </p>
+      
+        <h3>1. Installation</h3>
+        <p>
+          Before you start, make sure you have installed the Plant Fettle Detector on your system. If not, refer to the <a href="#installation" style="color:bisque">Installation</a> section for detailed instructions.
+        </p>
+
+        <h3>3. Choose an Option</h3>
+        <p>
+          On the web interface or the application, you'll find an option to select between plant disease detection or fruit quality detection.select the option which you want to perform.
+        </p>
+      
+        <h3>3. Upload an Image</h3>
+        <p>
+          On the web interface or the application, you'll find an option to upload an image of the plant you want to analyze. Click the "Capture" button or select the image file from your local storage.
+        </p>
+      
+        <h3>5. View Analysis Results</h3>
+        <p>
+          Once the image is uploaded or captured, the Plant Fettle Detector will analyze the plant's health. You will see the results displayed on the web interface or application, providing insights into the condition of your plant.It will also give causes and cure for the plant disease.
+        </p>
+      
+        <h3>6. Customize Settings (Optional)</h3>
+        <p>
+          If you want to customize the detection settings, you can edit the configuration files in the project's <code>config</code> directory. 
+        </p>
+      
+        <p>
+          Congratulations! You have successfully run the Plant Fettle Detector and analyzed the health of your plant. Feel free to explore more features and options available in the detector.
+        </p>
+      </section>
+      
+  </section>
+  </div>
+  <footer>
+    <p>&copy; 2023 Plant Fettle Detector. All rights reserved.</p>
+  </footer>
+  <div id="drawer">
+   
+    <a href="javascript:void(0)" class="close-btn" onclick="closeDrawer()">&times;</a>
+    <a href="homepage.html">Home</a>
+    <div class="dropdown">
+    <a href="#">Download</a>
+        <div class="dropdown-content">
+            <a href="documentation.html">Documentation</a>
+            <a href="#">App Installation</a>
+        </div>
+    </div>
+    <a href="ContactUs.html">Contact</a>
+
+ 
+  </div>
+  
+  <div id="content">
+    <div id="menu-btn" onclick="openDrawer()">&#9776; Menu</div>
+  </div>
+
+</body>
+</html>

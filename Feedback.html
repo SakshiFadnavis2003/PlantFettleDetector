@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Feedback</title>
+    <script>
+        function openDrawer() {
+          document.getElementById("drawer").style.width = "250px";
+          document.getElementById("content").style.marginLeft = "250px";
+        }
+      
+        function closeDrawer() {
+          document.getElementById("drawer").style.width = "0";
+          document.getElementById("content").style.marginLeft = "0";
+        }
+
+      </script>
+</head>
+<body>
+  <div class="topnav" style="position: relative;top: 120px;">
+    <a class="active" href="homepage.html">Home</a>
+    <a href="AboutUs.html">About</a>
+    <a href="Feedback.html">Feedback</a>
+    <a href="TermsOfService.html">TermsOfService</a>
+    <a href="FAQ.html">FAQs</a>
+  </div>
+  <h2 style="color: rgb(226, 236, 229); text-align: center;">Feedback Form</h2>
+  
+    <div class="textcolor">
+    <form action="submit_feedback.php" method="post">
+        <div class="text-box" style="color: rgb(226, 236, 229); background-color: rgba(44, 24, 4, 0.704);">
+        <!-- General Information -->
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location">
+
+        <!-- User Experience -->
+        <h3>User Experience:</h3>
+
+        <label for="overall_experience">Overall Experience:</label>
+        <div class="star-rating">
+            <input type="radio" id="rating1" name="overall_experience" value="1">
+            <label for="rating1">&#9733;</label>
+            <input type="radio" id="rating2" name="overall_experience" value="2">
+            <label for="rating2">&#9733;</label>
+            <input type="radio" id="rating3" name="overall_experience" value="3">
+            <label for="rating3">&#9733;</label>
+            <input type="radio" id="rating4" name="overall_experience" value="4">
+            <label for="rating4">&#9733;</label>
+            <input type="radio" id="rating5" name="overall_experience" value="5">
+            <label for="rating5">&#9733;</label>
+        </div>
+
+        <label for="useful_features">What features do you find most useful?</label>
+        <textarea id="useful_features" name="useful_features" rows="4"></textarea>
+
+        <label for="confusing_features">Is there anything confusing or difficult to use?</label>
+        <textarea id="confusing_features" name="confusing_features" rows="4"></textarea>
+
+        <!-- Additional Comments -->
+        <h3>Additional Comments:</h3>
+
+        <label for="additional_comments">Additional Comments or Suggestions:</label>
+        <textarea id="additional_comments" name="additional_comments" rows="4"></textarea>
+
+        <!-- Recommendation -->
+        <h3>Would you recommend this app to others?</h3>
+
+        <label>
+            <input type="radio" name="recommendation" value="Yes"> Yes
+        </label>
+        <label>
+            <input type="radio" name="recommendation" value="No"> No
+        </label>
+        <label>
+            <input type="radio" name="recommendation" value="Maybe"> Maybe
+        </label>
+
+        <!-- Any other thoughts or suggestions -->
+        <h3>Any other thoughts or suggestions?</h3>
+
+        <label for="other_thoughts">Any other thoughts or suggestions?</label>
+        <textarea id="other_thoughts" name="other_thoughts" rows="4"></textarea><br>
+
+        <!-- Submit Button -->
+        <button id="choicebtn"><a href="After_submit.html" target="_blank" style=" color: rgb(5, 5, 5);text-align: center;"> Submit</a></button><br>
+        <!-- <input type="submit" value="Submit Feedback"> -->
+
+    </form>
+    </div>
+</div>
+
+<div id="drawer">
+   
+    <a href="javascript:void(0)" class="close-btn" onclick="closeDrawer()">&times;</a>
+    <a href="homepage.html">Home</a>
+    <div class="dropdown">
+    <a href="#">Download</a>
+        <div class="dropdown-content">
+            <a href="documentation.html">Documentation</a>
+            <a href="#">App Installation</a>
+        </div>
+    </div>
+    <a href="ContactUs.html">Contact</a>
+
+ 
+  </div>
+  
+  <div id="content">
+    <div id="menu-btn" onclick="openDrawer()">&#9776; Menu</div>
+  </div>
+</body>
+</html>

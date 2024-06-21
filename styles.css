@@ -1,0 +1,322 @@
+html, body {
+    
+    margin: 0;
+      padding: 0;
+      background-image: url('apple.jpg'); 
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      height: 100%
+      width: 100%;
+      
+  }
+
+body{
+  background-image: url("apple.jpg");
+  
+}
+
+.topnav {
+  background-color: rgba(69, 36, 3, 0.609);
+  overflow: hidden;
+  
+}
+
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: rgb(0, 0, 0);
+}
+
+
+.topnav a.active {
+  background-color: rgb(15, 103, 0);
+  color: rgb(255, 255, 255);
+}
+#captureButton {
+   position: absolute;
+     bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #92b69200;
+    border: rgb(43, 123, 77);
+    cursor: pointer;
+    border-radius: 25px;
+  padding-left: 15px;
+  padding-top: 20px;
+  padding-right: 20px;
+  width: 80px;
+  height: 50px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+text-align: center;
+vertical-align: middle;
+margin: auto;
+display: flex;
+}
+
+#captureButton:hover{
+  background-color: #4d7f4d;
+}
+
+#choicebtn:hover{
+  background-color: #4d7f4d;;
+}
+
+#choicebtn{
+    /* left: 80%; */
+    transform: translateX(-10%);
+    background: #92b692;
+    border: rgb(13, 31, 21);
+    cursor: pointer;
+    border-radius: 25px;
+  padding-left: 25px;
+  padding-top: 20px;
+  width: 150px;
+  height: 60px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+text-align: center;
+vertical-align: middle;
+margin: auto;
+display: flex;
+}
+
+.round-button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    width: 24px; /* Adjust the width as needed */
+    height: 24px; /* Adjust the height as needed */
+}
+form {
+  max-width: 600px;
+  margin: auto;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.star-rating {
+  display: inline-block;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  font-size: 25px;
+  color: #5e5b5b;
+  float: right;
+}
+
+.star-rating input:checked ~ label,
+.star-rating input:checked ~ label ~ label {
+  color: #ffcc00;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #ffcc00;
+}
+
+h2 {
+  color: rgb(23, 65, 16);
+}
+
+p {
+  line-height: 1.5;
+}
+
+.textcolor{
+  color: rgb(226, 236, 229);
+  position: relative;
+  top: 90px;
+}
+
+#drawer {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(44, 24, 4, 0.888);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+#drawer a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+#drawer a:hover {
+  color: #f1f1f1;
+}
+
+#drawer .close-btn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#confirmContainer{
+  padding-left: 500px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#menu-btn {
+  font-size: 30px;
+  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+}
+
+#content {
+  transition: margin-left 0.5s;
+  padding: 16px;
+  color: rgb(226, 236, 229);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgba(75, 39, 4, 0.956);
+  min-width: 300px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: rgba(44, 24, 4, 0.963);}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .drawer a {background-color: #3e8e41;}
+
+.autosize-box {
+  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 10px;
+  
+}
+
+.text-box {
+  background-color: #fff; /* Set the background color to white */
+  border: 1px solid #ccc;
+  padding: 10px;
+  width:800px;
+  align-items: center;
+  display: inline-block;
+  text-align: left;
+}
+
+#gallery {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#gallery img {
+  width: 200px; 
+  height: 150px;
+  object-fit: cover;
+  margin: 5px;
+}
+
+input[type="file"] {
+  color: white; /* Set the text color to white */
+}
+
+/* Style for the "No file chosen" text */
+input[type="file"]::placeholder {
+  color: white; /* Set the placeholder text color to white */
+}
+
+/* Style for the "Browse" button (optional) */
+input[type="file"] + label {
+  color: white; /* Set the button text color to white */
+  background-color: #4CAF50; /* Set the button background color (change as needed) */
+  padding: 8px 12px; /* Adjust padding as needed */
+  border-radius: 4px; /* Add rounded corners to the button */
+  cursor: pointer; /* Change cursor to a pointer on hover */
+  display: inline-block; /* Align the button inline with the input */
+}
