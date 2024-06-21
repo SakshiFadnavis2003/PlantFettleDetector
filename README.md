@@ -37,8 +37,8 @@ Contributions are welcome! Please follow these steps:
 
 ## Acknowledgements
 We would like to acknowledge the contributions and support of the following individuals to this project:
-- **Khushi Bajpai** ([KhushiBajpai2003](https://github.com/KhushiBajpai2003)): [Describe their contribution or role, e.g., "Implementation of image processing algorithms."]
-- **Shruti Jain** ([shrutiijainn11](https://github.com/shrutiijainn11)): [Describe their contribution or role, e.g., "Development of web interface and frontend design."]
+- **Khushi Bajpai** ([KhushiBajpai2003](https://github.com/KhushiBajpai2003)):  Implementation of image processing algorithms.
+- **Shruti Jain** ([shrutiijainn11](https://github.com/shrutiijainn11)): Development of web interface and frontend design.
 
 
 
